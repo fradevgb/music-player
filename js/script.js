@@ -1,1 +1,13 @@
-console.log('music player');
+const wrapper = document.querySelector('.wrapper');
+const musicImg = wrapper.querySelector('.img-area img');
+const musicName = wrapper.querySelector('.song-details .name');
+const musicArtist = wrapper.querySelector('.song-details .artist');
+const playPauseBtn = wrapper.querySelector('.play-pause');
+const prevBtn = wrapper.querySelector('#prev');
+const nextBtn = wrapper.querySelector('#next');
+const mainAudio = wrapper.querySelector('#main-audio');
+const progressArea = wrapper.querySelector('.progress-area');
+const progressBar = wrapper.querySelector('.progress-bar');
+const musicList = wrapper.querySelector('.music-list');
+const moreMusicBtn = wrapper.querySelector('#more-music');
+const closeMoreMusic = wrapper.querySelector('#close');
