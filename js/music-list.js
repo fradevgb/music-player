@@ -29,4 +29,16 @@ let allMusic = [
     img: 'music-5',
     src: 'music-5',
   },
+  {
+    name: 'Lost Sky - Vision NCS',
+    artist: 'NCS Release',
+    img: 'music-6',
+    src: 'music-6',
+  },
+  {
+    name: 'Lost Sky - Dreams pt.II (feat. Sara Skinner)',
+    artist: 'NCS Release',
+    img: 'music-7',
+    src: 'music-7',
+  },
 ];
