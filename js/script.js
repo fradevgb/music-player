@@ -11,6 +11,7 @@ const progressBar = wrapper.querySelector('.progress-bar');
 const musicList = wrapper.querySelector('.music-list');
 const moreMusicBtn = wrapper.querySelector('#more-music');
 const closeMoreMusic = wrapper.querySelector('#close');
+const repeatBtn = wrapper.querySelector('#repeat-plist');
 
 let musicIndex = Math.floor(Math.random() * allMusic.length + 1);
 let isMusicPaused = true;
@@ -100,4 +101,60 @@ mainAudio.addEventListener('timeupdate', (e) => {
     currentSec = `0${currentSec}`;
   }
   musicCurrentTime.innerText = `${currentMin}:${currentSec}`;
+});
+
+progressArea.addEventListener('click', (e) => {
+  let progressWidth = progressArea.clientWidth;
+  console.log({ progressWidth });
+  let clickedOffsetX = e.offsetX;
+  console.log(clickedOffsetX);
+  let songDuration = mainAudio.duration;
+  console.log(songDuration);
+
+  mainAudio.currentTime = (clickedOffsetX / progressWidth) * songDuration;
+  playMusic();
+  playingSong();
+});
+
+repeatBtn.addEventListener('click', () => {
+  let getText = repeatBtn.innerText;
+
+  switch (getText) {
+    case 'repeat':
+      repeatBtn.innerText = 'repeat_one';
+      repeatBtn.setAttribute('title', 'Song looped');
+      break;
+    case 'repeat_one':
+      repeatBtn.innerText = 'shuffle';
+      repeatBtn.setAttribute('title', 'Playback Shuffled');
+      break;
+    case 'shuffle':
+      repeatBtn.innerText = 'repeat';
+      repeatBtn.setAttribute('title', 'Playlist looped');
+      break;
+  }
+});
+
+mainAudio.addEventListener('ended', () => {
+  let getText = repeatBtn.innerText;
+  switch (getText) {
+    case 'repeat':
+      nextMusic();
+      break;
+    case 'repeat_one':
+      mainAudio.currentTime = 0;
+      loadMusic(musicIndex);
+      playMusic();
+      break;
+    case 'shuffle':
+      let randIndex = Math.floor(Math.random() * allMusic.length + 1);
+      do {
+        randIndex = Math.floor(Math.random() * allMusic.length + 1);
+      } while (musicIndex == randIndex);
+      musicIndex = randIndex;
+      loadMusic(musicIndex);
+      playMusic();
+      playingSong();
+      break;
+  }
 });
